@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para o amor da minha vida</title>
+  <style>
+    /* Estilos combinados e ajustados */
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Georgia', cursive;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      transition: transform 0.5s ease, color 0.5s ease;
+    }
+    h1:hover {
+      transform: scale(1.05);
+      color: #ff6666;
+    }
+    h2 {
+      margin-top: 10px;
+      font-size: 2em;
+    }
+    p {
+      margin: 5px 0 20px 0;
+      font-size: 1.1em;
+      font-style: italic;
+      color: #ffcccc;
+    }
+
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin: 30px auto 60px auto;
+      max-width: 950px;
+    }
+
+    .foto {
+      width: 220px;
+      height: 320px;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .foto img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .foto img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    .foto p {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .heartsRain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heartsRain span {
+      position: absolute;
+      font-size: 20px;
+      color: pink;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      user-select: none;
+      opacity: 0.8;
+      text-shadow: 0 0 6px #f0f;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .hearts {
+      font-size: 2.2em;
+      animation: floatHearts 3s infinite;
+      color: red;
+      margin-bottom: 40px;
+    }
+    @keyframes floatHearts {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0); }
+    }
+
+    .qr-container {
+      margin: 40px 0 60px 0;
+      font-size: 1.3em;
+      color: #1DB954;
+      user-select: none;
+    }
+
+    .qr-container img {
+      margin-top: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px white;
+    }
+
+    .qr-container a {
+      color: #1DB954;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 15px;
+      box-shadow: 0 0 25px white;
+    }
+    .lightbox .close, .arrow {
+      position: absolute;
+      color: white;
+      font-size: 36px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .lightbox .arrow {
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 50px;
+    }
+    .arrow.left { left: 30px; }
+    .arrow.right { right: 30px; }
+    .close { top: 20px; right: 30px; }
+
+    #pirate-letter {
+      display: none;
+      margin: 40px auto;
+      width: 80%;
+      max-width: 700px;
+      background-color: #f5deb3;
+      padding: 25px 30px;
+      border: 5px solid #a0522d;
+      border-radius: 20px;
+      font-family: 'Times New Roman', serif;
+      color: #4B2E17;
+      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      white-space: pre-line;
+      text-align: justify;
+    }
+
+    .btn-pirata, .btn-fechar {
+      margin: 15px auto;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .btn-pirata {
+      background-color: #8B4513;
+      color: white;
+    }
+    .btn-fechar {
+      background-color: crimson;
+      color: white;
+      display: block;
+    }
+    .envelope {
+      margin: 30px auto;
+      cursor: pointer;
+      width: 90px;
+    }
+  </style>
+</head>
+<body>
+  <div class="heartsRain" id="heart-container"></div>
+
+  <h1>Para o amor da minha vida</h1>
+  <h2>{João Galdino}</h2>
+  <p>O que nunca acabou, e sempre irá existir!!</p>
+  <p>{O Nosso Amor!}</p>
+
+  <div class="galeria">
+    <div class="foto"><img src="imag4.jpg" alt="Foto 1"><p>28/05/2024</p></div>
+    <div class="foto"><img src="imag3.jpg" alt="Foto 2"><p>06/06/2024</p></div>
+    <div class="foto"><img src="imag2.jpg" alt="Foto 3"><p>18/08/2024</p></div>
+    <div class="foto"><img src="imag1.jpg" alt="Foto 4"><p>13/12/2024</p></div>
+  </div>
+
+  <div class="hearts">💕💖❤️ Eu Te Amo ❤️💖💕</div>
+
+  <button class="btn-pirata" onclick="mostrarCarta()">Abrir Carta 💌</button>
+  <div class="envelope" onclick="mostrarCarta()"><img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="90"></div>
+
+  <div id="pirate-letter">
+    Quando eu te conheci, jamais imaginei que um dia teria o privilégio de te chamar de “meu”.
+Você, que se tornaria o grande amor da minha vida, chegou de forma inesperada, mas foi a melhor surpresa que o destino poderia me dar.
+
+Eu sou, sinceramente, a pessoa mais sortuda do mundo por ter você ao meu lado. Às vezes me pergunto: e se eu tivesse te perdido lá atrás? E se o tempo não tivesse permitido que nossos caminhos se cruzassem? Não consigo nem imaginar… Porque a verdade é que você é a melhor coisa que já me aconteceu.
+
+Tudo o que mais quero é construir uma vida ao seu lado — cheia de sonhos, risadas, conquistas e até daqueles momentos bobos que só a gente entende.
+Sempre disse e sempre vou repetir: o jeito como a gente começou foi tão surreal… tão mágico.
+Parece até que estávamos vivendo dentro de um conto de fadas, ou em um daqueles doramas românticos que muitos chamam de sonho — e ainda assim, o meu sonho se tornou realidade, a nossa história é melhor do que qualquer roteiro, porque ela é real, é nossa, e é cheia de verdade.
+
+Você é incrível em todos os sentidos. Eu amo namorar você, amo estar com você, e mais do que tudo, amo sonhar com um futuro inteiro ao seu lado.
+Hoje comemoramos 2 anos e 5 meses dessa história linda que estamos escrevendo juntos.
+Feliz mês-versário, meu amor! 💖
+Obrigada por estar aqui, por nunca soltar minha mão, por me amar, por me cuidar.
+Eu te amo imensamente, de verdade, e pra sempre estarei aqui por você. 🌹
+    <button class="btn-fechar" onclick="fecharCarta()">Fechar Carta</button>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="fecharLightbox()">&times;</span>
+    <span class="arrow left" onclick="mudarImagem(-1)">&#10094;</span>
+    <img id="lightbox-img" src="" alt="Imagem ampliada">
+    <span class="arrow right" onclick="mudarImagem(1)">&#10095;</span>
+  </div>
+
+  <div class="qr-container">
+    <div style="font-size: 2.5em;">⬇</div>
+    <p>Aponte a câmera para ouvir nossa música especial:</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://open.spotify.com/intl-pt/track/7A4O4g0PiUEcn0LCdblnqK">
+    <a href="https://open.spotify.com/intl-pt/track/7A4O4g0PiUEcn0LCdblnqK" target="_blank">Ouvir no Spotify 💚</a>
+  </div>
+
+  <script>
+    const imagens = Array.from(document.querySelectorAll('.foto img'));
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let imgIndex = 0;
+
+    imagens.forEach((img, i) => {
+      img.addEventListener('click', () => {
+        imgIndex = i;
+        mostrarImagem();
+      });
+    });
+
+    function mostrarImagem() {
+      lightbox.style.display = 'flex';
+      lightboxImg.src = imagens[imgIndex].src;
+      lightboxImg.alt = imagens[imgIndex].alt;
+    }
+
+    function fecharLightbox() {
+      lightbox.style.display = 'none';
+    }
+
+    function mudarImagem(direcao) {
+      imgIndex = (imgIndex + direcao + imagens.length) % imagens.length;
+      mostrarImagem();
+    }
+
+    function mostrarCarta() {
+      document.getElementById('pirate-letter').style.display = 'block';
+    }
+    function fecharCarta() {
+      document.getElementById('pirate-letter').style.display = 'none';
+    }
+
+    const container = document.getElementById('heart-container');
+    const coracoes = ['❤️', '💖', '💕', '💘', '💗', '💞', '💝', '💓', '🧡'];
+    for (let i = 0; i < 60; i++) {
+      const span = document.createElement('span');
+      span.textContent = coracoes[Math.floor(Math.random() * coracoes.length)];
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.animationDuration = (Math.random() * 4 + 3) + 's';
+      span.style.fontSize = (Math.random() * 18 + 15) + 'px';
+      span.style.animationDelay = (Math.random() * 5) + 's';
+      container.appendChild(span);
+    }
+  </script>
+  <footer style="color: #ccc; font-style: italic; margin: 30px 0 40px 0; font-size: 1em;">
+  Ass: Eloysa Roodson
+</footer>
+
+</body>
+</html>
